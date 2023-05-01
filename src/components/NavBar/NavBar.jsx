@@ -3,6 +3,7 @@ import {
   Button,
   Click,
   Nav,
+  NavButtons,
   Search,
   UserList,
   UserListForm,
@@ -11,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
   const navigate = useNavigate();
-
   const menuItems = [
     {
       text: "공지사항",
@@ -23,6 +23,12 @@ const NavBar = () => {
       text: "인기 레시피",
       onClick: () => {
         navigate("/best");
+      },
+    },
+    {
+      text: "Q&A",
+      onClick: () => {
+        navigate("/q&a");
       },
     },
     {
@@ -46,32 +52,34 @@ const NavBar = () => {
           search
         </button>
       </Search>
-      <Button>
-        <div>
-          <ul
-            onClick={() => {
-              setView(!view);
-            }}
-          >
-            <span className="material-symbols-outlined">menu</span>
-            {view && (
-              <>
-                <UserListForm>
-                  <Click>
-                    {menuItems.map((item, index) => {
-                      return (
-                        <UserList key={index} onClick={item.onClick}>
-                          {item.text}
-                        </UserList>
-                      );
-                    })}
-                  </Click>
-                </UserListForm>
-              </>
-            )}
-          </ul>
-        </div>
-      </Button>
+      <NavButtons>
+        <Button>
+          <div>
+            <ul
+              onClick={() => {
+                setView(!view);
+              }}
+            >
+              <span className="material-symbols-outlined">menu</span>
+              {view && (
+                <>
+                  <UserListForm>
+                    <Click>
+                      {menuItems.map((item, index) => {
+                        return (
+                          <UserList key={index} onClick={item.onClick}>
+                            {item.text}
+                          </UserList>
+                        );
+                      })}
+                    </Click>
+                  </UserListForm>
+                </>
+              )}
+            </ul>
+          </div>
+        </Button>
+      </NavButtons>
     </Nav>
   );
 };

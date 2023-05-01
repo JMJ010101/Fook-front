@@ -26,13 +26,13 @@ export const Search = styled.div`
     width: 300px;
     height: inherit;
     padding: 4px 10px;
-    border: 1px solid #ccc;
+    border: 1px solid black;
     box-sizing: border-box;
     border-radius: 5px;
     /* outline: none; */
     background-color: #fff;
     color: #777;
-    font-size: 12px;
+    font-size: 13px;
     transition: width 0.4s;
   }
   .material-icons {
@@ -49,13 +49,18 @@ export const Search = styled.div`
   }
 `;
 
+export const NavButtons = styled.div`
+  display: flex;
+`;
+
 export const Button = styled.button`
-  width: 100px;
+  width: 190px;
   background-color: transparent;
   margin-top: 30px;
   border: none;
   border-radius: 1px;
-  font-size: 15px;
+  font-size: 14px;
+  text-align: center;
   font-weight: bold;
   cursor: pointer;
   &:hover {
@@ -63,21 +68,15 @@ export const Button = styled.button`
     transition: 0.3s;
   }
 `;
-
 export const Click = styled.ul`
   position: absolute;
-  border: none;
-  background-color: white;
-  border-radius: 3px;
   display: flex;
   flex-direction: column;
-  box-shadow: 2px 2px 2px 2px gray;
 `;
 export const UserListForm = styled.div`
   position: absolute;
   color: #333;
   width: 88px;
-
   &:not(:last-of-type) {
     border-bottom: 1px solid black;
   }
@@ -87,13 +86,22 @@ export const UserListForm = styled.div`
 `;
 
 export const UserList = styled.li`
-  padding: 10px 0px;
+  padding: 10px 0 20px;
   list-style: none;
   background-color: #c7e8ca;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 2px 1px 1.7px 1px gray;
   color: gray;
+  height: 10px;
+  width: 80px;
+  transition-property: height;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
   cursor: pointer;
   &:hover {
     background-color: #5d9c59;
     color: white;
+    height: 40px;
   }
 `;

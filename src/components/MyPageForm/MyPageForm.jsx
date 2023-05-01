@@ -1,20 +1,33 @@
 import React from "react";
-import { InfoBox, InfoButton, SideMenus } from "./MyPage";
+import { Container, InfoBox, InfoButton, SideMenus } from "./MyPage";
 import { useState } from "react";
 import DetailsForm from "./BoxPages/DetailsForm";
 import ChangePwForm from "./BoxPages/ChangePwForm";
 import ViewForm from "./BoxPages/ViewForm";
+import LikeForm from "./BoxPages/LikeForm";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const MyPageForm = () => {
   const [infoBoxContent, setInfoBoxContent] = useState(<DetailsForm />);
+  const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   if (!localStorage.getItem("id")) {
+  //     navigate("/login");
+  //     alert("로그인 후 이용가능합니다.");
+  //     return;
+  //   }
+  // }, [navigate]);
 
   const handleButtonClick = (content) => {
     setInfoBoxContent(content);
   };
+
   return (
     <>
       <SideMenus>
-        <ul>
+        <Container>
           <InfoButton onClick={() => handleButtonClick(<DetailsForm />)}>
             <span class="material-symbols-outlined">
               info
@@ -60,6 +73,21 @@ const MyPageForm = () => {
               </span>
             </span>
           </InfoButton>
+          <InfoButton onClick={() => handleButtonClick(<LikeForm />)}>
+            <span class="material-symbols-outlined">
+              favorite
+              <span
+                style={{
+                  fontSize: "17px",
+                  position: "relative",
+                  bottom: "5px",
+                  left: "10px",
+                }}
+              >
+                좋아요 리스트
+              </span>
+            </span>
+          </InfoButton>
           <InfoButton>
             <span class="material-symbols-outlined">
               logout
@@ -75,7 +103,7 @@ const MyPageForm = () => {
               </span>
             </span>
           </InfoButton>
-        </ul>
+        </Container>
       </SideMenus>
       <InfoBox>{infoBoxContent}</InfoBox>
     </>

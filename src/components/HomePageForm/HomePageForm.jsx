@@ -1,6 +1,15 @@
 import React from "react";
-import { Boards, Btn, Button, Home, MainRecipe, Notice } from "./HomePageSty";
+import {
+  Boards,
+  Btn,
+  Button,
+  Home,
+  MainRecipe,
+  Notice,
+  TodayRecipe,
+} from "./HomePageSty";
 import SimpleSlider from "./Slider/SimpleSlider";
+import random from "../Image/foodImg.jpg";
 
 const HomeForm = () => {
   return (
@@ -26,6 +35,22 @@ const HomeForm = () => {
           </div>
           <SimpleSlider></SimpleSlider>
         </MainRecipe>
+        <TodayRecipe>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div
+              style={{
+                textAlign: "center",
+                fontSize: "20px",
+                fontWeight: "bold",
+                color: "#333",
+                marginBottom: "10px",
+              }}
+            >
+              오늘의 레시피
+            </div>
+          </div>
+          <img src={random} alt="random"></img>
+        </TodayRecipe>
         <Notice>
           <div
             style={{

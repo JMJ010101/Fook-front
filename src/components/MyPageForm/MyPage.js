@@ -2,14 +2,21 @@ import styled from "styled-components";
 
 export const SideMenus = styled.div`
   border: none;
+  /* background-color: white; */
   position: absolute;
+  display: flex;
+  z-index: 1;
   top: 135px;
   left: 10;
   border-radius: 5px;
-  box-shadow: 2px 1px 1.7px 1px gray;
-  height: 68%;
-  width: 200px;
+  /* box-shadow: 2px 1px 1.7px 1px gray; */
+  height: 275px;
+  width: 40px;
   padding: 1rem 1rem 1rem 0;
+`;
+
+export const Container = styled.ul`
+  padding: 0px;
 `;
 
 export const InfoButton = styled.li`
@@ -20,9 +27,9 @@ export const InfoButton = styled.li`
   border-top-right-radius: 18px;
   border-bottom-right-radius: 18px;
   padding: 10px;
-  height: 20px;
+  height: 40px;
   overflow: hidden;
-  width: 20px;
+  width: 40px;
   transition-property: width;
   transition-duration: 0.1s;
   transition-timing-function: linear;
@@ -30,8 +37,8 @@ export const InfoButton = styled.li`
   &:hover {
     background-color: #5d9c59;
     color: white;
-    height: 20px;
-    width: 180px;
+    height: 40px;
+    width: 200px;
   }
 `;
 export const InfoBox = styled.div`
@@ -46,25 +53,4 @@ export const InfoBox = styled.div`
   height: 70%;
 
   box-shadow: 1px 2px 2px 2px gray;
-`;
-
-export const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  width: 300px;
-`;
-
-export const Button = styled.button`
-  padding: 10px;
-  background-color: #c7e8ca;
-  color: gray;
-  border: none;
-  border-radius: 4px;
-  font-size: 14px;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #5d9c59;
-    color: white;
-  }
 `;

@@ -4,7 +4,9 @@ import { Container } from "./AIFormSty";
 const AIForm = () => {
   return (
     <Container>
-      <h3>메뉴 추천</h3>
+      <div>
+        <h2>AI 추천</h2>
+      </div>
     </Container>
   );
 };

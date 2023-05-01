@@ -1,14 +1,19 @@
 import React from "react";
-
+import { Container, Header, NewQuestionBtn } from "./QuestionFormSty";
+import { Link } from "react-router-dom";
 import { Table } from "react-bootstrap";
-import { Container, Header } from "./NoticeFormSty";
 // import ReactPaginate from "react-paginate";
 
-const NoticeForm = () => {
+const QuestionForm = () => {
   return (
     <Container>
       <Header>
-        <h2 style={{ margin: "15px" }}>공지사항</h2>
+        <h2 style={{ margin: "15px" }}>Q&A 게시판</h2>
+        <div>
+          <Link to="/q&a/newpost">
+            <NewQuestionBtn>새 질문</NewQuestionBtn>
+          </Link>
+        </div>
       </Header>
       <Table striped bordered hover size="sm">
         <thead>
@@ -22,74 +27,74 @@ const NoticeForm = () => {
         <tbody>
           <tr>
             <td>1</td>
-            <td>공지사항입니다.</td>
-            <td>admin</td>
+            <td>영상이 안 떠요!</td>
+            <td>aaa</td>
             <td>2023/04/26</td>
           </tr>
           <tr>
             <td>2</td>
-            <td>회원분들께 알려드립니다.</td>
-            <td>admin</td>
+            <td>회원 수정은 어디서 하나요?</td>
+            <td>bbb</td>
             <td>2023/04/26</td>
           </tr>
           <tr>
             <td>3</td>
             <td>안녕하세요.</td>
-            <td>admin</td>
+            <td>ccc</td>
             <td>2023/04/26</td>
           </tr>
           <tr>
             <td>3</td>
             <td>안녕하세요.</td>
-            <td>admin</td>
+            <td>ccc</td>
             <td>2023/04/26</td>
           </tr>
           <tr>
             <td>3</td>
             <td>안녕하세요.</td>
-            <td>admin</td>
+            <td>ccc</td>
             <td>2023/04/26</td>
           </tr>
           <tr>
             <td>3</td>
             <td>안녕하세요.</td>
-            <td>admin</td>
+            <td>ccc</td>
             <td>2023/04/26</td>
           </tr>
           <tr>
             <td>3</td>
             <td>안녕하세요.</td>
-            <td>admin</td>
+            <td>ccc</td>
             <td>2023/04/26</td>
           </tr>
           <tr>
             <td>3</td>
             <td>안녕하세요.</td>
-            <td>admin</td>
+            <td>ccc</td>
             <td>2023/04/26</td>
           </tr>
           <tr>
             <td>3</td>
             <td>안녕하세요.</td>
-            <td>admin</td>
+            <td>ccc</td>
             <td>2023/04/26</td>
           </tr>
           <tr>
             <td>3</td>
             <td>안녕하세요.</td>
-            <td>admin</td>
+            <td>ccc</td>
             <td>2023/04/26</td>
           </tr>
           <tr>
             <td>3</td>
             <td>안녕하세요.</td>
-            <td>admin</td>
+            <td>ccc</td>
             <td>2023/04/26</td>
           </tr>
           <tr>
             <td>3</td>
             <td>안녕하세요.</td>
-            <td>admin</td>
+            <td>ccc</td>
             <td>2023/04/26</td>
           </tr>
         </tbody>
@@ -111,4 +116,4 @@ const NoticeForm = () => {
   );
 };
 
-export default NoticeForm;
+export default QuestionForm;

@@ -1,15 +1,10 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  margin: auto;
-  border: none;
-  width: 800px;
-  height: 70%;
-
-  box-shadow: 1px 2px 2px 2px gray;
+  width: 900px;
+  height: 600px;
+  margin: 0 auto;
+  box-shadow: 1px 5px 15px 5px lightgray;
+  margin-top: 30px;
+  padding: 20px;
 `;

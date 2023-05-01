@@ -1,22 +1,5 @@
 import styled from "styled-components";
 
-export const RegContainer = styled.form`
-  border: none;
-  box-shadow: 1px 5px 10px 5px lightgray;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  padding: 1rem;
-  width: 800px;
-  height: 60vh;
-  display: flex;
-  flex-direction: column;
-`;
-export const RegLabel = styled.label``;
-
 export const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -28,7 +11,6 @@ export const Container = styled.div`
   left: 0;
   right: 0;
   margin: auto;
-  /* height: 100vh; */
   flex: 1;
 `;
 

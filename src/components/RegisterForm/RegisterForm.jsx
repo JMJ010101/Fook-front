@@ -33,7 +33,7 @@ const RegisterForm = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [email, setEmail] = useState("");
   const [idOk, setIdOk] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phonenumber, setPhonenumber] = useState("");
   const [phoneOk, setPhoneOk] = useState("");
   const [birth, setBirth] = useState("");
   const [birthOk, setBirthOk] = useState("");
@@ -52,9 +52,9 @@ const RegisterForm = () => {
     const birthRegex = /^\d{4}\/\d{2}\/\d{2}$/;
     return birthRegex.test(birth);
   };
-  const isValidPhone = (phoneNumber) => {
+  const isValidPhone = (phonenumber) => {
     const PhoneRegex = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
-    return PhoneRegex.test(phoneNumber);
+    return PhoneRegex.test(phonenumber);
   };
 
   const handleSubmit = async (event) => {
@@ -63,7 +63,7 @@ const RegisterForm = () => {
     console.log("Password:", password);
     console.log("Confirm Password:", confirmPassword);
     console.log("name:", name);
-    console.log("PhoneNumber:", phoneNumber);
+    console.log("PhoneNumber:", phonenumber);
     console.log("Email:", email);
     console.log("Birth:", birth);
 
@@ -81,29 +81,30 @@ const RegisterForm = () => {
     }
 
     try {
-      const response = await axios.post(`${apiServer}/regist/`, {
+      const response = await axios.post(`${apiServer}/api/user/create`, {
         username,
         password,
         name,
         email,
-        phoneNumber,
+        phonenumber,
         birth,
       });
       alert("회원가입 성공");
-      navigate("/");
+      navigate("/login");
       console.log(response);
     } catch (error) {
-      if (error.response.data.detail === "Username already registered") {
-        alert("이미 존재하는 아이디입니다.");
-      }
+      console.log(error);
+      // if (error.response.data.detail === "Username already registered") {
+      //   alert("이미 존재하는 아이디입니다.");
+      // }
     }
   };
   return (
     <>
-      <meta
+      {/* <meta
         http-equiv="Content-Security-Policy"
         content="upgrade-insecure-requests"
-      ></meta>
+      ></meta> */}
       <Container>
         <Form onSubmit={handleSubmit}>
           <Header>회원가입</Header>
@@ -169,10 +170,10 @@ const RegisterForm = () => {
           <Input
             type="text"
             placeholder="전화번호(- 빼고 입력해주세요)"
-            value={phoneNumber}
+            value={phonenumber}
             maxLength={13}
             onChange={(e) => {
-              setPhoneNumber(e.target.value);
+              setPhonenumber(e.target.value);
               if (isValidPhone(e.target.value)) {
                 setPhoneOk(true);
               } else {
