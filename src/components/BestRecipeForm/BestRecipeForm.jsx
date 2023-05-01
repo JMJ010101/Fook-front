@@ -18,10 +18,16 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 const BestRecipeForm = () => {
-  const [like, setLike] = useState(0);
+  const [like, setLike] = useState(false);
+  const [likeNumber, setLikeNumber] = useState(0);
 
-  const ClickLike = () => {
-    setLike(!like);
+  const ChangeLike = () => {
+    if (!like) {
+      setLikeNumber(likeNumber + 1);
+    }
+    if (like) {
+      setLikeNumber(likeNumber - 1);
+    }
   };
 
   return (
@@ -46,12 +52,12 @@ const BestRecipeForm = () => {
               <LikeButton>
                 <span
                   onClick={() => {
-                    ClickLike();
-                    setLike(like + 1);
+                    setLike((e) => !e);
+                    ChangeLike();
                   }}
                   class="material-icons"
                 >
-                  favorite_border
+                  {!like ? "favorite_border" : "favorite"}
                 </span>
                 <p
                   style={{
@@ -60,7 +66,7 @@ const BestRecipeForm = () => {
                     marginRight: "9px",
                   }}
                 >
-                  {like}
+                  {likeNumber}
                 </p>
               </LikeButton>
             </DateLike>
