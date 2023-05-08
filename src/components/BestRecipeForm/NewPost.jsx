@@ -1,31 +1,3 @@
-// import React from "react";
-// import {
-//   Button,
-//   Container,
-//   Form,
-//   Header,
-//   Input,
-//   Textarea,
-//   Title,
-// } from "./NewPostSty";
-
-// const NewPost = () => {
-//   return (
-//     <Container>
-//       <Header>
-//         <Title>새 게시글 작성</Title>
-//       </Header>
-//       <Form>
-//         <Input type="text" placeholder="제목" />
-//         <Textarea placeholder="내용" />
-//         <Button>게시하기</Button>
-//       </Form>
-//     </Container>
-//   );
-// };
-
-// export default NewPost;
-
 import axios from "axios";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import ReactQuill from "react-quill";
@@ -39,7 +11,7 @@ export const WriteContainer = styled.div`
   height: 600px;
   margin: 0 auto;
   box-shadow: 1px 5px 15px 5px lightgray;
-  margin-top: 30px;
+  margin-top: 70px;
   padding: 20px;
   input {
     width: 850px;
@@ -77,13 +49,13 @@ const NewPost = () => {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const navigate = useNavigate();
-  useEffect(() => {
-    if (!localStorage.getItem("id")) {
-      navigate("/login");
-      alert("로그인 후 이용가능합니다.");
-      return;
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   if (!localStorage.getItem("id")) {
+  //     navigate("/login");
+  //     alert("로그인 후 이용가능합니다.");
+  //     return;
+  //   }
+  // }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

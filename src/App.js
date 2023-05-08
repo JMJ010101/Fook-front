@@ -12,6 +12,8 @@ import QuestionForm from "./components/QuestionForm/QuestionForm";
 import NewQuestion from "./components/QuestionForm/NewQuestion";
 import AIForm from "./components/AIForm/AIForm";
 import NoticeForm from "./components/NoticeForm/NoticeForm";
+import ViewPost from "./components/BestRecipeForm/ViewPost";
+import AIRecommend from "./components/AIForm/AIRecommend";
 
 function App() {
   return (
@@ -19,9 +21,11 @@ function App() {
       <NavBar />
       <Routes>
         <Route path="/notice" element={<NoticeForm />} />
+        <Route path="/ai/rec" element={<AIRecommend />} />
         <Route path="/ai" element={<AIForm />} />
         <Route path="/q&a/newpost" element={<NewQuestion />} />
         <Route path="/q&a" element={<QuestionForm />} />
+        <Route path="/best/view" element={<ViewPost />} />
         <Route path="/best/newpost" element={<NewPost />} />
         <Route path="/best" element={<BestRecipeForm />} />
         {/* <Route path="/mypage/:name" element={<MyPageForm />} /> */}

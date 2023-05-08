@@ -49,8 +49,7 @@ export const InfoBox = styled.div`
   left: 0;
   margin: auto;
   border: none;
-  width: 800px;
-  height: 70%;
-
-  box-shadow: 1px 2px 2px 2px gray;
+  width: 1000px;
+  height: 700px;
+  /* box-shadow: 1px 2px 2px 2px gray; */
 `;

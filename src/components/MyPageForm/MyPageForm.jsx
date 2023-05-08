@@ -7,6 +7,9 @@ import ViewForm from "./BoxPages/ViewForm";
 import LikeForm from "./BoxPages/LikeForm";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { setToken } from "./../../Auth";
+import apiServer from "../../api/api";
 
 const MyPageForm = () => {
   const [infoBoxContent, setInfoBoxContent] = useState(<DetailsForm />);
@@ -22,6 +25,20 @@ const MyPageForm = () => {
 
   const handleButtonClick = (content) => {
     setInfoBoxContent(content);
+  };
+
+  const handleLogout = async (event) => {
+    event.preventDefault();
+    localStorage.removeItem("token");
+    try {
+      const response = await axios.post(`${apiServer}/api/~~~~`, { setToken });
+      console.log(response);
+      alert("로그아웃 성공");
+      navigate("/login");
+    } catch (error) {
+      alert("로그아웃 실패");
+      console.log(error);
+    }
   };
 
   return (
@@ -69,7 +86,7 @@ const MyPageForm = () => {
                   left: "10px",
                 }}
               >
-                이력 관리
+                내 글 보기
               </span>
             </span>
           </InfoButton>
@@ -88,7 +105,7 @@ const MyPageForm = () => {
               </span>
             </span>
           </InfoButton>
-          <InfoButton>
+          <InfoButton onClick={handleLogout}>
             <span class="material-symbols-outlined">
               logout
               <span

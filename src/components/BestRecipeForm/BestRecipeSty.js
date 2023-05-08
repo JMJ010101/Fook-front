@@ -92,10 +92,9 @@ export const LikeButton = styled.div`
   flex-direction: column;
   .material-icons {
     font-size: 24px;
-    color: #8e8e8e;
+    color: #ff4c4c;
     &:hover {
       cursor: pointer;
-      color: #ff4c4c;
     }
   }
 `;

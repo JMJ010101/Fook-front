@@ -11,7 +11,7 @@ export const WriteContainer = styled.div`
   height: 600px;
   margin: 0 auto;
   box-shadow: 1px 5px 15px 5px lightgray;
-  margin-top: 30px;
+  margin-top: 70px;
   padding: 20px;
   input {
     width: 850px;
@@ -46,23 +46,28 @@ export const Button = styled.button`
 
 const NewQuestion = () => {
   const quillRef = useRef();
-  const [title, setTitle] = useState("");
+  const [id, setId] = useState("");
+  const [subject, setSubject] = useState("");
   const [content, setContent] = useState("");
+  const [create_date, setCreate_date] = useState("");
+
   const navigate = useNavigate();
-  useEffect(() => {
-    if (!localStorage.getItem("id")) {
-      navigate("/login");
-      alert("로그인 후 이용가능합니다.");
-      return;
-    }
-  }, [navigate]);
+  // useEffect(() => {
+  //   if (!localStorage.getItem("id")) {
+  //     navigate("/login");
+  //     alert("로그인 후 이용가능합니다.");
+  //     return;
+  //   }
+  // }, [navigate]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("제목: ", title);
+    console.log("번호: ", id);
+    console.log("제목: ", subject);
     console.log("내용: ", content);
+    console.log("날짜: ", create_date);
 
-    if (title === "") {
+    if (subject === "") {
       alert("제목을 작성해주세요.");
       return;
     }
@@ -72,9 +77,11 @@ const NewQuestion = () => {
     }
 
     try {
-      const response = await axios.post(`${apiServer}/~~~`, {
-        title,
+      const response = await axios.post(`${apiServer}/api/board/createboard`, {
+        id,
+        subject,
         content,
+        create_date,
       });
       alert("질문 등록 성공");
       navigate("/q&a");
@@ -105,10 +112,22 @@ const NewQuestion = () => {
   return (
     <WriteContainer onSubmit>
       <input
-        placeholder="제목을 입력해주세요."
-        value={title}
+        placeholder="번호를 입력해주세요."
+        value={id}
         type="text"
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => setId(e.target.value)}
+      ></input>
+      <input
+        placeholder="날짜를 입력해주세요."
+        value={create_date}
+        type="text"
+        onChange={(e) => setCreate_date(e.target.value)}
+      ></input>
+      <input
+        placeholder="제목을 입력해주세요."
+        value={subject}
+        type="text"
+        onChange={(e) => setSubject(e.target.value)}
       ></input>
       <ReactQuill
         style={{ width: "850px", height: "430px", marginBottom: "50px" }}

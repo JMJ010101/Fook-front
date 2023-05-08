@@ -16,21 +16,36 @@ const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
+  const headers = {
+    "Content-type": "application/x-www-form-urlencoded; charset=UTF-8",
+    Accept: "*/*",
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    try {
-      const response = await axios.post(`${apiServer}/login/`, {
-        username,
-        password,
-      });
-      console.log(response);
-      alert("로그인 성공");
-      localStorage.setItem("id", response.data.username);
-      navigate("/");
-      // localStorage.setItem("username", response.data.name);
-    } catch (error) {
-      alert("아이디나 비밀번호를 다시 확인해주세요.");
-      console.log(error);
+    if ((username === "") & (password === "")) {
+      return;
+    } else {
+      try {
+        const response = await axios.post(
+          `${apiServer}/api/user/login`,
+          {
+            username,
+            password,
+          },
+          { headers }
+        );
+        console.log(response);
+        alert("로그인 성공");
+        localStorage.setItem("id", response.data.username);
+        const token = response.data.access_token;
+        localStorage.setItem("accessToken", token);
+        navigate("/");
+        // localStorage.setItem("username", response.data.name);
+      } catch (error) {
+        alert("아이디나 비밀번호를 다시 확인해주세요.");
+        console.log(error);
+      }
     }
   };
 

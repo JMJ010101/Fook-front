@@ -84,7 +84,6 @@ const DetailsForm = () => {
             onChange={(e) => setBirth(e.target.value)}
           />
         </Form.Group>
-
         <Button type="submit" onClick={handleSubmit}>
           Submit
         </Button>
