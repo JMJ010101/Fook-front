@@ -12,6 +12,7 @@ export const WriteContainer = styled.div`
   margin: 0 auto;
   box-shadow: 1px 5px 15px 5px lightgray;
   margin-top: 70px;
+  margin-bottom: 300px;
   padding: 20px;
   input {
     width: 850px;
