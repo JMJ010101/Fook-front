@@ -8,11 +8,19 @@ import { BnContainer, Brand, LButtonBox, RButtonBox } from "./BotNavSty";
 const BotNav = () => {
   const navigate = useNavigate();
 
-  // const onClickMy = () => {
-  //   navigate(`/mypage/${localStorage.getItem("id")}`);
-  // };
   const onClickMy = () => {
-    navigate(`/mypage`);
+    if (!localStorage.getItem("id")) {
+      navigate("/login");
+      alert("로그인 후 이용가능합니다.");
+      return;
+    } else navigate(`/mypage/${localStorage.getItem("id")}`);
+  };
+
+  const handleLogout = async (event) => {
+    event.preventDefault();
+    localStorage.clear();
+    alert("로그아웃 성공");
+    navigate("/login");
   };
 
   return (
@@ -34,12 +42,19 @@ const BotNav = () => {
         </LButtonBox>
 
         <RButtonBox>
-          <Link to="/login">
-            <Button>
-              <span class="material-symbols-outlined">login</span>
-              <span>Login</span>
+          {localStorage.getItem("id") === null ? (
+            <Link to="/login">
+              <Button>
+                <span class="material-symbols-outlined">login</span>
+                <span>Login</span>
+              </Button>
+            </Link>
+          ) : (
+            <Button onClick={handleLogout}>
+              <span class="material-symbols-outlined">logout</span>
+              <span>Logout</span>
             </Button>
-          </Link>
+          )}
         </RButtonBox>
       </BnContainer>
     </>

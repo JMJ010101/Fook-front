@@ -1,10 +1,77 @@
-import React from "react";
-import { Container, Header, NewQuestionBtn } from "./QuestionFormSty";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import {
+  Container,
+  Header,
+  NewQuestionBtn,
+  PageContainer,
+} from "./QuestionFormSty";
+import { Link, useNavigate } from "react-router-dom";
 import { Table } from "react-bootstrap";
+import axios from "axios";
+import apiServer from "../../api/api";
+import QuestionDetail from "./QuestionDetail";
+import styled from "styled-components";
+import { PageBox } from "../BestRecipeForm/BestRecipeSty";
+import Paging from "../Paging/Paging";
 // import ReactPaginate from "react-paginate";
 
+export const Detail = styled(Link)`
+  text-decoration-line: none;
+  color: black;
+  &:hover {
+    color: #5d9c59;
+    font-weight: 700;
+  }
+`;
+
 const QuestionForm = () => {
+  const [boarditem, setBoardItem] = useState([]);
+  const [page, setPage] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const offset = (page - 1) * limit;
+
+  useEffect(() => {
+    try {
+      axios.get(`${apiServer}/api/board/getboard`).then((response) => {
+        const data = response.data;
+        setBoardItem(response.data);
+      });
+    } catch (error) {
+      console.log(error);
+    }
+    // 유저정보 가져오기
+    axios
+      .get(`${apiServer}/api/user/get_id/${localStorage.getItem("id")}`)
+      .then((response) => {
+        const userData = response.data;
+
+        try {
+          axios
+            .get(`${apiServer}/likes?user_id=${userData[0].id}`)
+            .then((response) => {
+              // 요청에 대한 처리 로직 추가
+              const Questionlikes = response.data;
+              Questionlikes.likes.forEach((like) => {
+                localStorage.setItem(
+                  `questionlike_${like}`,
+                  JSON.stringify(true)
+                );
+              });
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        } catch (error) {
+          console.error(error);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const sortedBoardItems = boarditem.sort((a, b) => b.id - a.id);
+
   return (
     <Container>
       <Header>
@@ -25,93 +92,26 @@ const QuestionForm = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>1</td>
-            <td>영상이 안 떠요!</td>
-            <td>aaa</td>
-            <td>2023/04/26</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>회원 수정은 어디서 하나요?</td>
-            <td>bbb</td>
-            <td>2023/04/26</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>안녕하세요.</td>
-            <td>ccc</td>
-            <td>2023/04/26</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>안녕하세요.</td>
-            <td>ccc</td>
-            <td>2023/04/26</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>안녕하세요.</td>
-            <td>ccc</td>
-            <td>2023/04/26</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>안녕하세요.</td>
-            <td>ccc</td>
-            <td>2023/04/26</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>안녕하세요.</td>
-            <td>ccc</td>
-            <td>2023/04/26</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>안녕하세요.</td>
-            <td>ccc</td>
-            <td>2023/04/26</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>안녕하세요.</td>
-            <td>ccc</td>
-            <td>2023/04/26</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>안녕하세요.</td>
-            <td>ccc</td>
-            <td>2023/04/26</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>안녕하세요.</td>
-            <td>ccc</td>
-            <td>2023/04/26</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>안녕하세요.</td>
-            <td>ccc</td>
-            <td>2023/04/26</td>
-          </tr>
+          {sortedBoardItems.slice(offset, offset + limit).map((item, index) => (
+            <tr key={item.id}>
+              <td>{index + 1}</td>
+              <td>
+                <Detail to={`/q&a/detail/${item.id}`}>{item.subject}</Detail>
+              </td>
+              <td>{item.username}</td>
+              <td>{item.create_date.split("T").shift()}</td>
+            </tr>
+          ))}
         </tbody>
       </Table>
-      {/* <ReactPaginate
-        pageCount={12}
-        pageRangeDisplayed={10}
-        marginPagesDisplayed={0}
-        breakLabel={""}
-        previousLabel={"이전"}
-        nextLabel={"다음"}
-        onPageChange={changePage}
-        containerClassName={"pagination-ul"}
-        activeClassName={"currentPage"}
-        previousClassName={"pageLabel-btn"}
-        nextClassName={"pageLabel-btn"}
-      /> */}
+      <PageContainer>
+        <Paging
+          total={boarditem.length}
+          limit={limit}
+          page={page}
+          setPage={setPage}
+        />
+      </PageContainer>
     </Container>
   );
 };
